@@ -42,8 +42,7 @@ namespace TaskPartTwo
                 sum += (10 - i) * digit;
             }
 
-            int checkDigit = 11 - (sum % 11);
-            return checkDigit;
+            return 11 - (sum % 11);
         }
     }
 }
