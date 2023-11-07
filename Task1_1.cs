@@ -34,7 +34,7 @@ namespace proyect01_Omar
 
             for (int i = firstNumber; i <= secondNumber; i++)
             {
-                string duodecimal = ConvertToDuodecimal(Math.Abs(i)); // Use Math.Abs to ensure we're working with positive numbers
+                string duodecimal = ConvertToDuodecimal(Math.Abs(i)); 
                 int countA = CountAInDuodecimal(duodecimal);
 
                 if (countA == 2)
