@@ -20,8 +20,7 @@ namespace taskOnePartThree
                 int[] newUniqueArray = new int[userArray];
 
                 for (int i = 0; i < userArray; i++)
-                {
-                    
+                {  
                     Console.Write($"Enter element {i + 1}: ");
                     if (int.TryParse(Console.ReadLine(), out int userElementInput))
                     {
