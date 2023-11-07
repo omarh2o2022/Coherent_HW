@@ -10,9 +10,8 @@ namespace taskOnePartThree
             Console.WriteLine("please enter your name");
             string userName = Console.ReadLine();
 
-            Console.WriteLine($"Hello! {userName}, enter the elements your array will contain.");
-            Console.Write("\nHow many elements do you want your array to have?: ");
-            
+            Console.WriteLine($"Hello! {userName}, How many elements do you want your array to have?.");
+                        
             if (int.TryParse(Console.ReadLine(), out int userArray) && userArray > 0)
             {
                 int[] originalUserArray = new int[userArray];
@@ -38,11 +37,14 @@ namespace taskOnePartThree
                     }
                 }
 
-                Console.WriteLine("\nthis is your original array:");
+                Console.WriteLine("\nThis is your original array:");
                 PrintArray(originalUserArray);
 
-                Console.WriteLine("\nthis is the unique array:");
-                PrintArray(newUniqueArray, uniqueCount);
+                int[] uniqueArray = new int[uniqueCount];
+                Array.Copy(newUniqueArray, uniqueArray, uniqueCount);
+
+                Console.WriteLine("\nThis is the unique array:");
+                PrintArray(uniqueArray);
             }
             else
             {
@@ -52,16 +54,11 @@ namespace taskOnePartThree
             Console.Read();
         }
 
-        static void PrintArray(int[] arr, int length = -1)
+        static void PrintArray(int[] arr)
         {
-            if (length == -1)
+             for (int i = 0; i < arr.Length; i++)
             {
-                length = arr.Length;
-            }
-
-            for (int i = 0; i < length; i++)
-            {
-                Console.Write(arr[i] + " ");
+              Console.Write(arr[i] + " ");
             }
             Console.WriteLine();
         }
