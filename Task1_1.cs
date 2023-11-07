@@ -34,12 +34,12 @@ namespace proyect01_Omar
 
             for (int i = firstNumber; i <= secondNumber; i++)
             {
-                string duodecimal = ConvertToDuodecimal(i);
+                string duodecimal = ConvertToDuodecimal(Math.Abs(i)); // Use Math.Abs to ensure we're working with positive numbers
                 int countA = CountAInDuodecimal(duodecimal);
 
                 if (countA == 2)
                 {
-                    Console.WriteLine(i);
+                  Console.WriteLine($"Decimal: {i}, Duodecimal: {duodecimal}");
                 }
             }
 
