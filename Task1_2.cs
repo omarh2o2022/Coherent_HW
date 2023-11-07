@@ -26,17 +26,8 @@ namespace TaskPartTwo
 
             int checkDigit = CalculateCheckDigit(input);
 
-            string isbn;
-            if (checkDigit == 10)
-            {
-                isbn = input + "X";
-            }
-            else
-            {
-                isbn = input + checkDigit.ToString();
-            }
-
-
+            string isbn = input + (checkDigit == 10 ? "X" : checkDigit.ToString());
+            
             Console.WriteLine($"thank you, your generated ISBN is: {isbn}");
             Console.WriteLine("to exit press enter");
             Console.Read();
