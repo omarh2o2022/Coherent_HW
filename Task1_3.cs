@@ -10,7 +10,7 @@ namespace taskOnePartThree
             Console.WriteLine("please enter your name");
             string userName = Console.ReadLine();
 
-            Console.WriteLine($"Hello! {userName}, enter the elements your array will contain, then enter the number of each element.");
+            Console.WriteLine($"Hello! {userName}, enter the elements your array will contain.");
             Console.Write("\nHow many elements do you want your array to have?: ");
             
             if (int.TryParse(Console.ReadLine(), out int userArray) && userArray > 0)
