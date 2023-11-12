@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskTwo
 {
-    internal class ThreeDimensionalSpaceWithMass
+    internal class Point3DWithMass
     {
         private double[] coordinates = new double[3];
         private double mass;
@@ -35,7 +35,7 @@ namespace TaskTwo
             set { mass = (value >= 0) ? value : 0; }
         }
 
-        public ThreeDimensionalSpaceWithMass(double valueOfX, double valueOfY, double valueOfZ, double valueOfMass)
+        public Point3DWithMass(double valueOfX, double valueOfY, double valueOfZ, double valueOfMass)
         {
             X = valueOfX; 
             Y = valueOfY; 
@@ -48,7 +48,7 @@ namespace TaskTwo
             return X == 0 && Y == 0 && Z == 0;
         }
 
-        public double CalculateDistance(ThreeDimensionalSpaceWithMass newPointObject)
+        public double CalculateDistance(Point3DWithMass newPointObject)
         {
             double newX = X - newPointObject.X;
             double newY = Y - newPointObject.Y;
