@@ -4,16 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Task2_3
 {
+    public interface ILesson
+    {
+        string TextDescription { get; set; }
+    }
 
-    public class Lecture
+    public class Lecture : ILesson
     {
         public string TextDescription { get; set; }
         public string Topic { get; set; }
     }
 
-    public class PracticalLesson
+    public class PracticalLesson : ILesson
     {
         public string TextDescription { get; set; }
         public string TaskConditionLink { get; set; }
@@ -22,13 +27,22 @@ namespace Task2_3
 
     public class Training
     {
-        public List<object> lessons = new List<object>();
+        public ILesson[] lessons; 
 
         public string TextDescription { get; set; }
 
-        public void Add(object lesson)
+        public void Add(ILesson lesson)
         {
-            lessons.Add(lesson);
+            if (lessons == null)
+            {
+                lessons = new ILesson[] { lesson };
+            }
+            else
+            {
+                int newLength = lessons.Length + 1;
+                Array.Resize(ref lessons, newLength);
+                lessons[newLength - 1] = lesson;
+            }
         }
 
         public bool IsPractical()
@@ -47,33 +61,9 @@ namespace Task2_3
         {
             Training clonedTraining = new Training
             {
-                TextDescription = this.TextDescription
+                TextDescription = this.TextDescription,
+                lessons = this.lessons != null ? (ILesson[])this.lessons.Clone() : null 
             };
-
-            foreach (var lesson in lessons)
-            {
-                if (lesson is Lecture)
-                {
-                    Lecture originalLecture = (Lecture)lesson;
-                    Lecture clonedLecture = new Lecture
-                    {
-                        TextDescription = originalLecture.TextDescription,
-                        Topic = originalLecture.Topic
-                    };
-                    clonedTraining.Add(clonedLecture);
-                }
-                else if (lesson is PracticalLesson)
-                {
-                    PracticalLesson originalPracticalLesson = (PracticalLesson)lesson;
-                    PracticalLesson clonedPracticalLesson = new PracticalLesson
-                    {
-                        TextDescription = originalPracticalLesson.TextDescription,
-                        TaskConditionLink = originalPracticalLesson.TaskConditionLink,
-                        SolutionLink = originalPracticalLesson.SolutionLink
-                    };
-                    clonedTraining.Add(clonedPracticalLesson);
-                }
-            }
 
             return clonedTraining;
         }
