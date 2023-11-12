@@ -7,9 +7,9 @@ namespace TaskTwo
     {
         static void Main(string[] args)
         {
-            ThreeDimensionalSpaceWithMass firstPoint = new ThreeDimensionalSpaceWithMass(1, 2, 3, 5);            
+            Point3DWithMass firstPoint = new Point3DWithMass(1, 2, 3, 5);
 
-            ThreeDimensionalSpaceWithMass secondPoint = new ThreeDimensionalSpaceWithMass(4, 5, 6, -1);            
+            Point3DWithMass secondPoint = new Point3DWithMass(4, 5, 6, -1);            
 
             Console.WriteLine($"firstPoint coordinates: X={firstPoint.X}, Y={firstPoint.Y}, Z={firstPoint.Z}, Mass={firstPoint.Mass}");
             Console.WriteLine($"secondPoint coordinates: X={secondPoint.X} , Y= {secondPoint.Y}, Z={secondPoint.Z} , Mass= {secondPoint.Mass}");
