@@ -9,9 +9,7 @@ namespace Task2_3
     internal class Program
     {
         static void Main(string[] args)
-        {
-
-            
+        {           
             Training originalTraining = new Training
             {
                 TextDescription = "C# training management system"
