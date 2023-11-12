@@ -38,6 +38,13 @@ namespace Task2_2
                     return 0;
                 return diagonalElements[i];
             }
+             set
+            {
+                 if (i >= 0 && j >= 0 && i < Size && j < Size && i == j)
+                 {
+                     diagonalElements[i] = value;
+                 }     
+            }
         }
 
         public int Track()
