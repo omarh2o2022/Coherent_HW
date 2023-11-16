@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Task2_3
 {
-    public abstract class Lesson
+    public abstract class Lesson : ICloneable
     {
         public string Description { get; set; }
+        public abstract object Clone();
     }
 }
