@@ -9,7 +9,7 @@ namespace HomeWork4
     public class MatrixTracker<T>
     {
         private DiagonalMatrix<T> matrix;
-        private ElementChangedEventArgs<T> lastChange;
+        private EventArgsChanged<T> lastChange;
 
         public MatrixTracker(DiagonalMatrix<T> matrix)
         {
@@ -26,7 +26,7 @@ namespace HomeWork4
             }
         }
 
-        private void Matrix_ElementChanged(object sender, ElementChangedEventArgs<T> elementOne)
+        private void Matrix_ElementChanged(object sender, EventArgsChanged<T> elementOne)
         {
             lastChange = elementOne;
         }
