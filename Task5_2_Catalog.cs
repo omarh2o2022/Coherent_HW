@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Task5_2
 {
@@ -17,24 +16,57 @@ namespace Task5_2
 
         public void AddBook(string isbn, Book book)
         {
-            string normalizedISBN = isbn.Replace("-", "");
-
-            if (!books.ContainsKey(normalizedISBN))
+            // Check ISBN validity before adding
+            if (IsValidISBN(isbn))
             {
-                books.Add(normalizedISBN, book);
+                string normalizedISBN = isbn.Replace("-", "");
+
+                if (!books.ContainsKey(normalizedISBN))
+                {
+                    books.Add(normalizedISBN, book);
+                }
+                else
+                {
+                    Console.WriteLine($"ISBN {isbn} already exists in the catalog.");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Invalid ISBN format: {isbn}");
             }
         }
 
         public Book GetBook(string isbn)
         {
-            string normalizedISBN = isbn.Replace("-", "");
-
-            if (books.TryGetValue(normalizedISBN, out Book book))
+            // Check ISBN validity before retrieving
+            if (IsValidISBN(isbn))
             {
-                return book;
+                string normalizedISBN = isbn.Replace("-", "");
+
+                if (books.TryGetValue(normalizedISBN, out Book book))
+                {
+                    return book;
+                }
+                else
+                {
+                    Console.WriteLine($"Book with ISBN {isbn} not found in the catalog.");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Invalid ISBN format: {isbn}");
             }
 
             return null;
+        }
+
+        private bool IsValidISBN(string isbn)
+        {
+            // ISBN regex pattern
+            string pattern = @"^\d{3}-?\d-?\d{2}-?\d{6}-?\d$|^\d{13}$";
+
+            // Check if the provided ISBN matches the pattern
+            return Regex.IsMatch(isbn, pattern);
         }
 
         public IEnumerable<string> GetSortedTitles()
