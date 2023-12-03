@@ -9,7 +9,7 @@ namespace Task5_1
     {
         private readonly int rows;
         private readonly int columns;
-        private readonly Dictionary<int, Dictionary<int, long>> matrixData;
+        private readonly Dictionary<(int Row, int Column), long> _elements;
 
         public SparseMatrix(int rows, int columns)
         {
@@ -18,7 +18,7 @@ namespace Task5_1
 
             this.rows = rows;
             this.columns = columns;
-            this.matrixData = new Dictionary<int, Dictionary<int, long>>();
+            this._elements = new Dictionary<(int Row, int Column), long>();
         }
 
         public long this[int i, int j]
@@ -28,7 +28,7 @@ namespace Task5_1
                 if (i < 0 || i >= rows || j < 0 || j >= columns)
                     throw new IndexOutOfRangeException("Invalid matrix indices.");
 
-                return matrixData.ContainsKey(i) && matrixData[i].ContainsKey(j) ? matrixData[i][j] : 0;
+                return _elements.TryGetValue((i, j), out var value) ? value : 0;
             }
             set
             {
@@ -37,15 +37,11 @@ namespace Task5_1
 
                 if (value != 0)
                 {
-                    if (!matrixData.ContainsKey(i))
-                        matrixData[i] = new Dictionary<int, long>();
-
-                    matrixData[i][j] = value;
+                    _elements[(i, j)] = value;
                 }
                 else
                 {
-                    if (matrixData.ContainsKey(i) && matrixData[i].ContainsKey(j))
-                        matrixData[i].Remove(j);
+                    _elements.Remove((i, j));
                 }
             }
         }
@@ -66,59 +62,24 @@ namespace Task5_1
             return GetEnumerator();
         }
 
-        public IEnumerable<(int, int, long)> GetNonzeroElements()
+        public IEnumerable<(int Row, int Column, long Value)> GetNonzeroElements()
         {
-            foreach (var row in matrixData.Keys.OrderBy(i => i))
-            {
-                foreach (var col in matrixData[row].Keys.OrderBy(j => j))
-                {
-                    yield return (row, col, matrixData[row][col]);
-                }
-            }
+            return _elements
+                .OrderBy(e => e.Key.Column)
+                .ThenBy(e => e.Key.Row)
+                .Select(e => (e.Key.Row, e.Key.Column, e.Value));
         }
 
         public int GetCount(long x)
         {
-            if (x == 0)
-            {
-                int count = 0;
-                foreach (var row in matrixData.Values)
-                {
-                    foreach (var val in row.Values)
-                    {
-                        if (val == 0)
-                            count++;
-                    }
-                }
-                return count;
-            }
-            else
-            {
-                int count = 0;
-                foreach (var row in matrixData.Values)
-                {
-                    foreach (var val in row.Values)
-                    {
-                        if (val == x)
-                            count++;
-                    }
-                }
-                return count;
-            }
+            return _elements.Count(e => e.Value == x);
         }
 
         public override string ToString()
         {
-            string result = "";
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < columns; j++)
-                {
-                    result += $"{this[i, j]} ";
-                }
-                result += "\n";
-            }
-            return result;
+            return string.Join(Environment.NewLine,
+                Enumerable.Range(0, rows)
+                          .Select(row => string.Join(" ", Enumerable.Range(0, columns).Select(col => this[row, col]))));
         }
     }
 }
