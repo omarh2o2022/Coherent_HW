@@ -46,6 +46,14 @@ namespace Task6
            CatalogDisplay.DisplayCatalog("Loaded Catalog from XML", loadedCatalogFromXml);
            CatalogDisplay.DisplayCatalog("Loaded Catalog from JSON", loadedCatalogFromJson);
 
+           // Save each author's books to a separate JSON file
+           AuthorToJson.SaveAuthorToJsonFile(author1, new List<Book> { book1, book3 });
+           AuthorToJson.SaveAuthorToJsonFile(author2, new List<Book> { book1, book4 });
+           AuthorToJson.SaveAuthorToJsonFile(author3, new List<Book> { book2, book5 });
+           AuthorToJson.SaveAuthorToJsonFile(author4, new List<Book> { book2, book3 });
+           AuthorToJson.SaveAuthorToJsonFile(author5, new List<Book> { book4 });
+           AuthorToJson.SaveAuthorToJsonFile(author6, new List<Book> { book5 });
+
            Console.ReadLine();
         }          
     }    
