@@ -54,6 +54,20 @@ namespace Task6
            AuthorToJson.SaveAuthorToJsonFile(author5, new List<Book> { book4 });
            AuthorToJson.SaveAuthorToJsonFile(author6, new List<Book> { book5 });
 
+           // Create PaperBook and EBook Libraries using Abstract Factory
+           Library paperLibrary = LibraryFactory.CreatePaperLibrary();
+           Library ebookLibrary = LibraryFactory.CreateEBookLibrary();
+
+           // Save to XML
+           IRepository<Library> xmlLibraryRepository = new XMLRepository<Library>();
+           xmlLibraryRepository.Save("paperLibrary.xml", paperLibrary);
+           xmlLibraryRepository.Save("ebookLibrary.xml", ebookLibrary);
+
+           // Save to JSON
+           IRepository<Library> jsonLibraryRepository = new JSONRepository<Library>();
+           jsonLibraryRepository.Save("paperLibrary.json", paperLibrary);
+           jsonLibraryRepository.Save("ebookLibrary.json", ebookLibrary);
+
            Console.ReadLine();
         }          
     }    
