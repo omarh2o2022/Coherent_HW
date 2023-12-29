@@ -4,7 +4,11 @@ namespace Task6
 {
     public class Catalog
     {
+        public Catalog() { } // For deserialization from data file
+
         private Dictionary<string, Book> booksByIsbn = new Dictionary<string, Book>();
+
+        public List<Book> Books { get; set; } = new List<Book>();
 
         public void AddBook(string isbn, Book book)
         {
@@ -34,8 +38,9 @@ namespace Task6
         }
 
         private string NormalizeIsbn(string isbn)
-        {         
+        {
             return isbn.Replace("-", "");
         }
     }
 }
+
