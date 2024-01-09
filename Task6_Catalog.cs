@@ -41,6 +41,11 @@ namespace Task6
         {
             return isbn.Replace("-", "");
         }
+        public static Catalog CreatePaperBookCatalog()
+        {
+         Catalog paperBookCatalog = new Catalog();
+         return paperBookCatalog;
+        }
     }
 }
 
