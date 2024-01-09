@@ -68,6 +68,14 @@ namespace Task6
            jsonLibraryRepository.Save("paperLibrary.json", paperLibrary);
            jsonLibraryRepository.Save("ebookLibrary.json", ebookLibrary);
 
+           // Use PaperBookLibraryFactory
+           var paperBookLibraryFactory = new ConcretePaperBookLibraryFactory();
+           var pressReleaseItems = paperBookLibraryFactory.CreatePressReleaseItems();
+
+           // Use EBookLibraryFactory
+           ILibraryFactory eBookFactory = new EBookLibraryFactory();
+           Library eBookLibrary = new Library(eBookFactory.CreateCatalog(), eBookFactory.CreatePressReleaseItems());
+
            Console.ReadLine();
         }          
     }    
