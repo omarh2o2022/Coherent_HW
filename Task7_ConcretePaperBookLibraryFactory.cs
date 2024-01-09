@@ -13,8 +13,7 @@ namespace Task6.task7
         public Catalog CreateCatalog()
         {
             // Implementation for creating a catalog for PaperBooks
-            Catalog catalog = new Catalog();
-            // Add PaperBooks to the catalog
+            Catalog catalog = new Catalog();          
             return catalog;
         }
     }
